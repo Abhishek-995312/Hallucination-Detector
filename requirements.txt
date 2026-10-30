@@ -1,0 +1,8 @@
+sentence-transformers
+chromadb
+requests
+torch
+python-dotenv
+groq
+fastapi
+uvicorn
