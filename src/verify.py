@@ -1,8 +1,8 @@
-"""Phase 4 - Claim verification (the core of the project).
+"""Phase 4 - Claim verification.
 
 For each claim:
   1. retrieve the top-K evidence chunks for THAT claim
-  2. cut each chunk into short sentence windows (NLI works best on short text)
+  2. cut each chunk into short sentence windows (NLI works good for short text)
   3. drop windows that are not about the same topic as the claim (relevance filter)
   4. run NLI on (evidence window, claim) -> entailment / contradiction / neutral
   5. turn the scores into Supported / Contradicted / Unsupported

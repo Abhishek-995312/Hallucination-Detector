@@ -97,12 +97,12 @@ def main() -> None:
 
     config.DB_DIR.mkdir(parents=True, exist_ok=True)
     client = chromadb.PersistentClient(path=str(config.DB_DIR))
-    try:  # rebuild from scratch so re-running never creates duplicates
+    try:  # rebuild from scratch so re-running never creates duplicates (clears out any existing collection with same name)
         client.delete_collection(config.COLLECTION_NAME)
     except Exception:
         pass
     collection = client.create_collection(
-        config.COLLECTION_NAME, metadata={"hnsw:space": "cosine"}
+        config.COLLECTION_NAME, metadata={"hnsw:space": "cosine"}  # cosine similarity.
     )
 
     total = 0
@@ -123,6 +123,7 @@ def main() -> None:
 
         embeddings = model.encode(chunks, normalize_embeddings=True).tolist()
         url = "https://en.wikipedia.org/wiki/" + title.replace(" ", "_")
+        # chroma DB stores with ID,text,vector,metadata.
         collection.add(
             ids=[f"{title}::{i}" for i in range(len(chunks))],
             documents=chunks,

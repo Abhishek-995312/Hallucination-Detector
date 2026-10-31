@@ -13,6 +13,7 @@ DB_DIR = ROOT / "data" / "chroma_db"  # ChromaDB persistent storage
 COLLECTION_NAME = "human_body"
 
 EMBED_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
+# 384 - number vector.
 
 CHUNK_WORDS = 200  # target max words per chunk
 OVERLAP_WORDS = 40  # words shared between neighbouring chunks

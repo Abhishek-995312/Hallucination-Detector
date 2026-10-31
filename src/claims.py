@@ -1,4 +1,4 @@
-"""Phase 3 - Claim extraction.
+"""Phase 3 - Claim extraction.(convert large para into atomic claims).
 
 Turn an LLM answer into short, single-fact, self-contained claims.
 
@@ -56,7 +56,7 @@ def _parse_json_list(raw: str) -> list[str] | None:
             return [c.strip() for c in data if c.strip()]
     return None
 
-
+# if parse jason list fails to split llm output that handle by fallback to ensure pipeline runs.
 def _fallback_split(text: str) -> list[str]:
     """If the LLM output is unusable, fall back to one claim per sentence."""
     return [s.strip() for s in re.split(r"(?<=[.!?])\s+", text) if len(s.split()) >= 3]

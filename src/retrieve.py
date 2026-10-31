@@ -1,4 +1,4 @@
-"""Phase 1b - Retrieve evidence for a query.
+"""Phase 1b - Retrieve evidence(searching through your vector database) for a query.
 
 Usage as a library (used later by the pipeline):
     from src.retrieve import Retriever
@@ -19,6 +19,7 @@ from src import config
 
 class Retriever:
     def __init__(self) -> None:
+        # to use same embedding(turn search queries into numerical vectors)
         self.model = SentenceTransformer(config.EMBED_MODEL)
         client = chromadb.PersistentClient(path=str(config.DB_DIR))
         self.collection = client.get_collection(config.COLLECTION_NAME)
@@ -47,6 +48,7 @@ class Retriever:
         return hits
 
 
+# command line test block for this file.
 if __name__ == "__main__":
     query = " ".join(sys.argv[1:]) or "What does the liver do?"
     retriever = Retriever()
